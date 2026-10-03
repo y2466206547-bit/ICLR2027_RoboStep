@@ -1,0 +1,148 @@
+{
+  "benchmark": "SoftGym",
+  "task_id": "PourWater",
+  "task_type": "Fluid",
+  "long_horizon": false,
+  "K": 2,
+  "transitions": 1,
+  "horizon": 100,
+  "stages": [
+    "pour_progress",
+    "target_fill_completion"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "cup_alignment",
+      "tilt",
+      "early_transfer",
+      "retained_water"
+    ],
+    [
+      "target_fill",
+      "retained_water",
+      "source_emptying"
+    ]
+  ],
+  "simulator_state_api": "source/target cup geometry, water particles, in-glass test",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "PourWater",
+    "task_description": "PourWater manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "SoftGym",
+      "task_type": "Fluid",
+      "long_horizon": false,
+      "simulator_state_api": "source/target cup geometry, water particles, in-glass test",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "pour_progress",
+        "semantic_objective": "Pour progress",
+        "potential_terms": [
+          {
+            "name": "cup_alignment",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "tilt",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "early_transfer",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "retained_water",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "pour_progress_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Pour progress"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "target_fill_completion",
+        "semantic_objective": "Target fill completion",
+        "potential_terms": [
+          {
+            "name": "target_fill",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "retained_water",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "source_emptying",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "target_fill_completion_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "pour_progress"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Target fill completion"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

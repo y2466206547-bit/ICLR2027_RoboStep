@@ -1,0 +1,211 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "RotateValveLevel4-v1",
+  "task_type": "Artic.",
+  "long_horizon": false,
+  "K": 4,
+  "transitions": 3,
+  "horizon": 100,
+  "stages": [
+    "reach_valve_spokes",
+    "establish_turning_motion",
+    "rotate_full_turn",
+    "settle_success"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "contact_error"
+    ],
+    [
+      "contact_error",
+      "positive_motion"
+    ],
+    [
+      "rotation_progress"
+    ],
+    [
+      "success",
+      "valve_speed"
+    ]
+  ],
+  "simulator_state_api": "finger tips, valve pose/qpos/qvel, turn direction, success",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "RotateValveLevel4-v1",
+    "task_description": "RotateValveLevel4-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "simulator_state_api": "finger tips, valve pose/qpos/qvel, turn direction, success",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "reach_valve_spokes",
+        "semantic_objective": "Reach valve spokes",
+        "potential_terms": [
+          {
+            "name": "contact_error",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reach_valve_spokes_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reach valve spokes"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "establish_turning_motion",
+        "semantic_objective": "Establish turning motion",
+        "potential_terms": [
+          {
+            "name": "contact_error",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "positive_motion",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "establish_turning_motion_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_valve_spokes"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Establish turning motion"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "rotate_full_turn",
+        "semantic_objective": "Rotate full turn",
+        "potential_terms": [
+          {
+            "name": "rotation_progress",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "rotate_full_turn_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_valve_spokes",
+          "establish_turning_motion"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Rotate full turn"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "settle_success",
+        "semantic_objective": "Settle success",
+        "potential_terms": [
+          {
+            "name": "success",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "valve_speed",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "settle_success_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_valve_spokes",
+          "establish_turning_motion",
+          "rotate_full_turn"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Settle success"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

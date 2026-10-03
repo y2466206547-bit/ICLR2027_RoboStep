@@ -1,0 +1,205 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "PokeCube-v1",
+  "task_type": "Tool",
+  "long_horizon": false,
+  "K": 4,
+  "transitions": 3,
+  "horizon": 100,
+  "stages": [
+    "reach_tool",
+    "grasp_tool",
+    "align_tool_with_cube",
+    "poke_to_goal"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_peg"
+    ],
+    [
+      "grasped"
+    ],
+    [
+      "peg_angle",
+      "head_cube_distance"
+    ],
+    [
+      "cube_goal"
+    ]
+  ],
+  "simulator_state_api": "TCP, peg/cube/goal poses, grasp, orientation",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "PokeCube-v1",
+    "task_description": "PokeCube-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "simulator_state_api": "TCP, peg/cube/goal poses, grasp, orientation",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "reach_tool",
+        "semantic_objective": "Reach tool",
+        "potential_terms": [
+          {
+            "name": "tcp_peg",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reach_tool_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reach tool"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "grasp_tool",
+        "semantic_objective": "Grasp tool",
+        "potential_terms": [
+          {
+            "name": "grasped",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "grasp_tool_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_tool"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Grasp tool"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "align_tool_with_cube",
+        "semantic_objective": "Align tool with cube",
+        "potential_terms": [
+          {
+            "name": "peg_angle",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "head_cube_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "align_tool_with_cube_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_tool",
+          "grasp_tool"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Align tool with cube"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "poke_to_goal",
+        "semantic_objective": "Poke to goal",
+        "potential_terms": [
+          {
+            "name": "cube_goal",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "poke_to_goal_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_tool",
+          "grasp_tool",
+          "align_tool_with_cube"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Poke to goal"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

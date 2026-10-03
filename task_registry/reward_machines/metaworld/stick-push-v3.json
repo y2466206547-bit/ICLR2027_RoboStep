@@ -1,0 +1,253 @@
+{
+  "benchmark": "Meta-World",
+  "task_id": "stick-push-v3",
+  "task_type": "Tool",
+  "long_horizon": false,
+  "K": 4,
+  "transitions": 3,
+  "horizon": 200,
+  "stages": [
+    "approach_tool",
+    "capture_and_lift_tool",
+    "tool_endpoint_at_secondary_object",
+    "secondary_object_at_goal"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_to_pregrasp",
+      "gripper_opening"
+    ],
+    [
+      "tcp_to_grasp",
+      "held",
+      "tool_lift"
+    ],
+    [
+      "effect_to_secondary",
+      "alignment_distance",
+      "gripper_closed",
+      "held",
+      "tcp_to_grasp"
+    ],
+    [
+      "secondary_to_target",
+      "effect_to_secondary",
+      "held"
+    ]
+  ],
+  "simulator_state_api": "TCP, tool/secondary/target poses, gripper, optional orientation",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "stick-push-v3",
+    "task_description": "stick-push-v3 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "Meta-World",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "simulator_state_api": "TCP, tool/secondary/target poses, gripper, optional orientation",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "approach_tool",
+        "semantic_objective": "Approach tool",
+        "potential_terms": [
+          {
+            "name": "tcp_to_pregrasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "gripper_opening",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "approach_tool_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Approach tool"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "capture_and_lift_tool",
+        "semantic_objective": "Capture and lift tool",
+        "potential_terms": [
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "tool_lift",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "capture_and_lift_tool_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_tool"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Capture and lift tool"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "tool_endpoint_at_secondary_object",
+        "semantic_objective": "Tool endpoint at secondary object",
+        "potential_terms": [
+          {
+            "name": "effect_to_secondary",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "alignment_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "gripper_closed",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "tool_endpoint_at_secondary_object_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_tool",
+          "capture_and_lift_tool"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Tool endpoint at secondary object"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "secondary_object_at_goal",
+        "semantic_objective": "Secondary object at goal",
+        "potential_terms": [
+          {
+            "name": "secondary_to_target",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "effect_to_secondary",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "secondary_object_at_goal_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_tool",
+          "capture_and_lift_tool",
+          "tool_endpoint_at_secondary_object"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Secondary object at goal"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

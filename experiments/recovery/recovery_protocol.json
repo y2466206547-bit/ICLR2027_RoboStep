@@ -1,0 +1,11 @@
+{
+  "benchmark": "ManiSkill",
+  "tasks": [
+    {"task": "PickCube-v1", "checkpoint": "artifacts/checkpoints/recovery/pickcube_checkpoint_best.pt", "disturbance": "object displacement/drop", "target_stage": 0},
+    {"task": "PickSingleYCB-v1", "checkpoint": "artifacts/checkpoints/recovery/picksingleycb_checkpoint_best.pt", "disturbance": "object displacement/drop", "target_stage": 0}
+  ],
+  "gate": "GateVLM",
+  "vlm_model": "Qwen/Qwen3.5-9B (download separately)",
+  "query_protocol": "RGB evidence after disturbance; predict the earlier stage index; fail closed on invalid/abstaining responses",
+  "evaluation_seed": 9042
+}

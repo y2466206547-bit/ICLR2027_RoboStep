@@ -1,0 +1,247 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "TwoRobotStackCube-v1",
+  "task_type": "Precise",
+  "long_horizon": true,
+  "K": 5,
+  "transitions": 4,
+  "horizon": 100,
+  "stages": [
+    "reach_assigned_cubes",
+    "grasp_top_cube",
+    "place_bottom_cube",
+    "stack_top_cube",
+    "release_both"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "reach"
+    ],
+    [
+      "cubeA_grasped"
+    ],
+    [
+      "cubeB_goal",
+      "cubeA_grasped"
+    ],
+    [
+      "cubeA_top_error"
+    ],
+    [
+      "success"
+    ]
+  ],
+  "simulator_state_api": "robot TCPs, cube/goal poses, grasp, success",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "TwoRobotStackCube-v1",
+    "task_description": "TwoRobotStackCube-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "simulator_state_api": "robot TCPs, cube/goal poses, grasp, success",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "reach_assigned_cubes",
+        "semantic_objective": "Reach assigned cubes",
+        "potential_terms": [
+          {
+            "name": "reach",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reach_assigned_cubes_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reach assigned cubes"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "grasp_top_cube",
+        "semantic_objective": "Grasp top cube",
+        "potential_terms": [
+          {
+            "name": "cubeA_grasped",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "grasp_top_cube_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_assigned_cubes"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Grasp top cube"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "place_bottom_cube",
+        "semantic_objective": "Place bottom cube",
+        "potential_terms": [
+          {
+            "name": "cubeB_goal",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "cubeA_grasped",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "place_bottom_cube_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_assigned_cubes",
+          "grasp_top_cube"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Place bottom cube"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "stack_top_cube",
+        "semantic_objective": "Stack top cube",
+        "potential_terms": [
+          {
+            "name": "cubeA_top_error",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "stack_top_cube_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_assigned_cubes",
+          "grasp_top_cube",
+          "place_bottom_cube"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Stack top cube"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "release_both",
+        "semantic_objective": "Release both",
+        "potential_terms": [
+          {
+            "name": "success",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "release_both_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_assigned_cubes",
+          "grasp_top_cube",
+          "place_bottom_cube",
+          "stack_top_cube"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Release both"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

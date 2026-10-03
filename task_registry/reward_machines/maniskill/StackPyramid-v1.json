@@ -1,0 +1,346 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "StackPyramid-v1",
+  "task_type": "Precise",
+  "long_horizon": true,
+  "K": 7,
+  "transitions": 6,
+  "horizon": 250,
+  "stages": [
+    "grasp_red",
+    "place_red_beside_green",
+    "release_red",
+    "grasp_blue",
+    "align_blue",
+    "stack_blue",
+    "release_blue"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_red",
+      "grasp_red"
+    ],
+    [
+      "red_green_distance"
+    ],
+    [
+      "beside",
+      "release_red"
+    ],
+    [
+      "tcp_blue",
+      "grasp_blue"
+    ],
+    [
+      "blue_goal"
+    ],
+    [
+      "stacked"
+    ],
+    [
+      "success"
+    ]
+  ],
+  "simulator_state_api": "TCP, three cube poses, grasp/static flags, success",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "StackPyramid-v1",
+    "task_description": "StackPyramid-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "simulator_state_api": "TCP, three cube poses, grasp/static flags, success",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "grasp_red",
+        "semantic_objective": "Grasp red",
+        "potential_terms": [
+          {
+            "name": "tcp_red",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "grasp_red",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "grasp_red_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Grasp red"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "place_red_beside_green",
+        "semantic_objective": "Place red beside green",
+        "potential_terms": [
+          {
+            "name": "red_green_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "place_red_beside_green_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Place red beside green"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "release_red",
+        "semantic_objective": "Release red",
+        "potential_terms": [
+          {
+            "name": "beside",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "release_red",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "release_red_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red",
+          "place_red_beside_green"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Release red"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "grasp_blue",
+        "semantic_objective": "Grasp blue",
+        "potential_terms": [
+          {
+            "name": "tcp_blue",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "grasp_blue",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "grasp_blue_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red",
+          "place_red_beside_green",
+          "release_red"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Grasp blue"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "align_blue",
+        "semantic_objective": "Align blue",
+        "potential_terms": [
+          {
+            "name": "blue_goal",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "align_blue_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red",
+          "place_red_beside_green",
+          "release_red",
+          "grasp_blue"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Align blue"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "stack_blue",
+        "semantic_objective": "Stack blue",
+        "potential_terms": [
+          {
+            "name": "stacked",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "stack_blue_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red",
+          "place_red_beside_green",
+          "release_red",
+          "grasp_blue",
+          "align_blue"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Stack blue"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "release_blue",
+        "semantic_objective": "Release blue",
+        "potential_terms": [
+          {
+            "name": "success",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "release_blue_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "grasp_red",
+          "place_red_beside_green",
+          "release_red",
+          "grasp_blue",
+          "align_blue",
+          "stack_blue"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Release blue"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "benchmark": "Meta-World",
+  "task_id": "door-unlock-v3",
+  "task_type": "Artic.",
+  "long_horizon": false,
+  "K": 3,
+  "transitions": 2,
+  "horizon": 200,
+  "stages": [
+    "approach_lock",
+    "contact_lock",
+    "unlock_articulation"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "prepress_distance"
+    ],
+    [
+      "tcp_to_contact_point"
+    ],
+    [
+      "contact_distance",
+      "press_or_target_distance",
+      "tcp_press_axis_distance"
+    ]
+  ],
+  "simulator_state_api": "TCP, control/handle, target pose",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "door-unlock-v3",
+    "task_description": "door-unlock-v3 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "Meta-World",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "approach_lock",
+        "semantic_objective": "Approach lock",
+        "potential_terms": [
+          {
+            "name": "prepress_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "approach_lock_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Approach lock"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "contact_lock",
+        "semantic_objective": "Contact lock",
+        "potential_terms": [
+          {
+            "name": "tcp_to_contact_point",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "contact_lock_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_lock"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Contact lock"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "unlock_articulation",
+        "semantic_objective": "Unlock articulation",
+        "potential_terms": [
+          {
+            "name": "contact_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "press_or_target_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "tcp_press_axis_distance",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "unlock_articulation_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_lock",
+          "contact_lock"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Unlock articulation"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

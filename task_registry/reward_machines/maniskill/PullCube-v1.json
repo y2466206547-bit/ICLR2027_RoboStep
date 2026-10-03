@@ -1,0 +1,158 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "PullCube-v1",
+  "task_type": "Rigid",
+  "long_horizon": false,
+  "K": 3,
+  "transitions": 2,
+  "horizon": 100,
+  "stages": [
+    "reach_pull_pose",
+    "establish_contact",
+    "pull_to_goal"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_pull"
+    ],
+    [
+      "tcp_pull"
+    ],
+    [
+      "obj_goal"
+    ]
+  ],
+  "simulator_state_api": "TCP, cube/goal poses",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "PullCube-v1",
+    "task_description": "PullCube-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "simulator_state_api": "TCP, cube/goal poses",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "reach_pull_pose",
+        "semantic_objective": "Reach pull pose",
+        "potential_terms": [
+          {
+            "name": "tcp_pull",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reach_pull_pose_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reach pull pose"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "establish_contact",
+        "semantic_objective": "Establish contact",
+        "potential_terms": [
+          {
+            "name": "tcp_pull",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "establish_contact_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_pull_pose"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Establish contact"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "pull_to_goal",
+        "semantic_objective": "Pull to goal",
+        "potential_terms": [
+          {
+            "name": "obj_goal",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "pull_to_goal_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_pull_pose",
+          "establish_contact"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Pull to goal"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

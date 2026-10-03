@@ -1,0 +1,67 @@
+{
+  "task_id": "PickCube-v1",
+  "task_description": "Pick the cube and place it at the commanded goal.",
+  "simulator_state_api": {
+    "tcp_position": "float[3]",
+    "cube_position": "float[3]",
+    "goal_position": "float[3]",
+    "grasped": "bool",
+    "cube_velocity": "float[3]",
+    "official_success": "bool (evaluation only; never dense reward)"
+  },
+  "repair_round": 0,
+  "program": {
+    "task_id": "PickCube-v1",
+    "task_description": "Pick the cube and place it at the commanded goal.",
+    "source": "frame_vlm_example",
+    "compiler_round": 0,
+    "model_id": "",
+    "stages": [
+      {
+        "stage_id": "reach_object",
+        "semantic_objective": "Move the TCP to a stable pre-grasp pose above the cube.",
+        "potential_terms": [{"name": "tcp_to_cube", "weight": 1.0, "direction": "decrease"}],
+        "dwell_steps": 3,
+        "transition_bonus": 0.5,
+        "dense_scale": 5.0,
+        "maintenance_terms": [],
+        "safety_terms": ["tcp_speed"],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": false,
+        "visible_evidence": [],
+        "abstain_conditions": []
+      },
+      {
+        "stage_id": "establish_grasp",
+        "semantic_objective": "Secure the cube and begin a controlled lift.",
+        "potential_terms": [{"name": "grasp_capture", "weight": 1.0, "direction": "increase"}],
+        "dwell_steps": 6,
+        "transition_bonus": 0.75,
+        "dense_scale": 6.0,
+        "maintenance_terms": ["held"],
+        "safety_terms": ["cube_speed"],
+        "prerequisites": ["reach_object"],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": ["cube visibly controlled by gripper"],
+        "abstain_conditions": ["occlusion", "motion blur"]
+      },
+      {
+        "stage_id": "transport_and_settle",
+        "semantic_objective": "Transport the controlled cube to the commanded goal and settle it.",
+        "potential_terms": [{"name": "cube_to_goal", "weight": 1.0, "direction": "decrease"}],
+        "dwell_steps": 10,
+        "transition_bonus": 1.0,
+        "dense_scale": 8.0,
+        "maintenance_terms": ["held"],
+        "safety_terms": ["cube_speed", "loss_of_control"],
+        "prerequisites": ["establish_grasp"],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": ["cube is at goal and no longer moving"],
+        "abstain_conditions": ["goal occluded"]
+      }
+    ]
+  }
+}

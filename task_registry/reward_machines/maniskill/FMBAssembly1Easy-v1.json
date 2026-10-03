@@ -1,0 +1,296 @@
+{
+  "benchmark": "ManiSkill",
+  "task_id": "FMBAssembly1Easy-v1",
+  "task_type": "Precise",
+  "long_horizon": true,
+  "K": 6,
+  "transitions": 5,
+  "horizon": 500,
+  "stages": [
+    "reach_bridge",
+    "grasp_bridge",
+    "reorient_with_fixture",
+    "regrasp_bridge",
+    "align_with_board",
+    "place_bridge"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_bridge"
+    ],
+    [
+      "grasped"
+    ],
+    [
+      "fixture_error",
+      "goal_angle"
+    ],
+    [
+      "grasped"
+    ],
+    [
+      "goal_pos",
+      "goal_angle"
+    ],
+    [
+      "goal_pos"
+    ]
+  ],
+  "simulator_state_api": "TCP, bridge/fixture/goal poses, grasp, orientation",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "FMBAssembly1Easy-v1",
+    "task_description": "FMBAssembly1Easy-v1 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "ManiSkill",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "simulator_state_api": "TCP, bridge/fixture/goal poses, grasp, orientation",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "reach_bridge",
+        "semantic_objective": "Reach bridge",
+        "potential_terms": [
+          {
+            "name": "tcp_bridge",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reach_bridge_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reach bridge"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "grasp_bridge",
+        "semantic_objective": "Grasp bridge",
+        "potential_terms": [
+          {
+            "name": "grasped",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "grasp_bridge_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_bridge"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Grasp bridge"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "reorient_with_fixture",
+        "semantic_objective": "Reorient with fixture",
+        "potential_terms": [
+          {
+            "name": "fixture_error",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "goal_angle",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "reorient_with_fixture_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_bridge",
+          "grasp_bridge"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Reorient with fixture"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "regrasp_bridge",
+        "semantic_objective": "Regrasp bridge",
+        "potential_terms": [
+          {
+            "name": "grasped",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "regrasp_bridge_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_bridge",
+          "grasp_bridge",
+          "reorient_with_fixture"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Regrasp bridge"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "align_with_board",
+        "semantic_objective": "Align with board",
+        "potential_terms": [
+          {
+            "name": "goal_pos",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "goal_angle",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "align_with_board_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_bridge",
+          "grasp_bridge",
+          "reorient_with_fixture",
+          "regrasp_bridge"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Align with board"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "place_bridge",
+        "semantic_objective": "Place bridge",
+        "potential_terms": [
+          {
+            "name": "goal_pos",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "place_bridge_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "reach_bridge",
+          "grasp_bridge",
+          "reorient_with_fixture",
+          "regrasp_bridge",
+          "align_with_board"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Place bridge"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

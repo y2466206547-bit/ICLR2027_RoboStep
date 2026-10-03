@@ -1,0 +1,3 @@
+# Core dependency. Torch and benchmark environments are optional;
+# see pyproject.toml and README.md for the matched experiment extras.
+numpy>=1.23

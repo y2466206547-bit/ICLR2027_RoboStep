@@ -1,0 +1,20 @@
+{
+  "benchmark": "Meta-World",
+  "task": "pick-place-v3",
+  "macro_count": 10,
+  "atomic_stages_per_macro": 3,
+  "stage_id_size": 31,
+  "geometry_protocol": "tabletop_unique_chain_v8",
+  "gate": "rule",
+  "physical_continuity": true,
+  "reset_between_macros": false,
+  "num_envs": 128,
+  "steps_per_env": 64,
+  "base_iterations_per_macro": 700,
+  "max_episode_length": 250,
+  "training_seed": 42,
+  "evaluation_seeds": [1042, 2042],
+  "evaluation_episodes_per_seed": 256,
+  "checkpoint": "artifacts/checkpoints/compositional_m10/model_6999.pt",
+  "checkpoint_kind": "optimizer-restored continuation from the measured M10 run"
+}

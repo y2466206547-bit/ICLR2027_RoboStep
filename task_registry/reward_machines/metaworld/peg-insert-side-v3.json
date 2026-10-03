@@ -1,0 +1,325 @@
+{
+  "benchmark": "Meta-World",
+  "task_id": "peg-insert-side-v3",
+  "task_type": "Precise",
+  "long_horizon": true,
+  "K": 5,
+  "transitions": 4,
+  "horizon": 500,
+  "stages": [
+    "approach_object",
+    "capture_object",
+    "fixture_clearance",
+    "transport_or_extract",
+    "verify_task_outcome"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "tcp_to_pregrasp",
+      "gripper_opening"
+    ],
+    [
+      "tcp_to_grasp",
+      "held",
+      "capture_progress"
+    ],
+    [
+      "tcp_to_vertical",
+      "clearance_progress",
+      "tcp_to_grasp",
+      "held"
+    ],
+    [
+      "tcp_to_transport",
+      "object_transport_to_final",
+      "clearance_progress",
+      "tcp_to_grasp",
+      "held",
+      "object_to_final"
+    ],
+    [
+      "object_to_final",
+      "fine_object_to_final",
+      "tcp_to_grasp",
+      "held"
+    ]
+  ],
+  "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "peg-insert-side-v3",
+    "task_description": "peg-insert-side-v3 manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "Meta-World",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "approach_object",
+        "semantic_objective": "Approach object",
+        "potential_terms": [
+          {
+            "name": "tcp_to_pregrasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "gripper_opening",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "approach_object_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Approach object"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "capture_object",
+        "semantic_objective": "Capture object",
+        "potential_terms": [
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "capture_progress",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "capture_object_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_object"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Capture object"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "fixture_clearance",
+        "semantic_objective": "Fixture clearance",
+        "potential_terms": [
+          {
+            "name": "tcp_to_vertical",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "clearance_progress",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "fixture_clearance_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_object",
+          "capture_object"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Fixture clearance"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "transport_or_extract",
+        "semantic_objective": "Transport or extract",
+        "potential_terms": [
+          {
+            "name": "tcp_to_transport",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "object_transport_to_final",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "clearance_progress",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          },
+          {
+            "name": "object_to_final",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "transport_or_extract_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_object",
+          "capture_object",
+          "fixture_clearance"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Transport or extract"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "verify_task_outcome",
+        "semantic_objective": "Verify task outcome",
+        "potential_terms": [
+          {
+            "name": "object_to_final",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "fine_object_to_final",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "tcp_to_grasp",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "held",
+            "weight": 1.0,
+            "direction": "increase"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "verify_task_outcome_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "approach_object",
+          "capture_object",
+          "fixture_clearance",
+          "transport_or_extract"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Verify task outcome"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}

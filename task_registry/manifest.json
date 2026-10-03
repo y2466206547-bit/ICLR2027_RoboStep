@@ -1,0 +1,3500 @@
+{
+  "schema": "robostep-task-registry-v2",
+  "suite": {
+    "Meta-World": 50,
+    "ManiSkill": 19,
+    "SoftGym": 6
+  },
+  "total": 75,
+  "tasks": [
+    {
+      "benchmark": "Meta-World",
+      "task_id": "assembly-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/assembly-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "basketball-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/basketball-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "bin-picking-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/bin-picking-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "box-close-v3",
+      "task_type": "Artic.",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/box-close-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "button-press-topdown-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/button-press-topdown-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "button-press-topdown-wall-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/button-press-topdown-wall-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "button-press-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/button-press-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "button-press-wall-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/button-press-wall-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "coffee-button-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/coffee-button-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "coffee-pull-v3",
+      "task_type": "Rigid",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/coffee-pull-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "coffee-push-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/coffee-push-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "dial-turn-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/dial-turn-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "disassemble-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/disassemble-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "door-close-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/door-close-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "door-lock-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/door-lock-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "door-open-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/door-open-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "door-unlock-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_lock",
+        "contact_lock",
+        "unlock_articulation"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/door-unlock-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "drawer-close-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_handle",
+        "contact_handle",
+        "close_drawer"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "align_xy_distance",
+          "tcp_above_handle"
+        ],
+        [
+          "hook_distance",
+          "tcp_above_handle"
+        ],
+        [
+          "open_distance",
+          "pull_waypoint_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, handle/target poses",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/drawer-close-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "drawer-open-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "align_above_handle",
+        "hook_handle",
+        "open_drawer"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "align_xy_distance",
+          "tcp_above_handle"
+        ],
+        [
+          "hook_distance",
+          "tcp_above_handle"
+        ],
+        [
+          "open_distance",
+          "pull_waypoint_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, handle/target poses",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/drawer-open-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "faucet-close-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_handle",
+        "contact_handle",
+        "close_faucet"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/faucet-close-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "faucet-open-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_handle",
+        "contact_handle",
+        "open_faucet"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/faucet-open-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "hammer-v3",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_obj",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "obj_to_target",
+          "tcp_to_goal",
+          "tcp_to_obj",
+          "gripper_closed",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/hammer-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "hand-insert-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/hand-insert-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "handle-press-side-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_handle",
+        "contact_handle",
+        "press_handle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/handle-press-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "handle-press-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/handle-press-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "handle-pull-side-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/handle-pull-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "handle-pull-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_handle",
+        "contact_handle",
+        "pull_handle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/handle-pull-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "lever-pull-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/lever-pull-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "peg-insert-side-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/peg-insert-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "peg-unplug-side-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/peg-unplug-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "pick-out-of-hole-v3",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_obj",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "obj_to_target",
+          "tcp_to_goal",
+          "tcp_to_obj",
+          "gripper_closed",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/pick-out-of-hole-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "pick-place-v3",
+      "task_type": "Rigid",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/pick-place-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "pick-place-wall-v3",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_obj",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "obj_to_target",
+          "tcp_to_goal",
+          "tcp_to_obj",
+          "gripper_closed",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/pick-place-wall-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "plate-slide-back-side-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/plate-slide-back-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "plate-slide-back-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/plate-slide-back-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "plate-slide-side-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/plate-slide-side-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "plate-slide-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/plate-slide-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "push-back-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/push-back-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "push-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/push-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "push-wall-v3",
+      "task_type": "Rigid",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "reach_left_clearance",
+        "reacquire_front_push_contact",
+        "clear_wall_front",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "waypoint_distance",
+          "tcp_obj_distance"
+        ],
+        [
+          "path_contact_distance",
+          "tcp_obj_distance",
+          "path_progress"
+        ],
+        [
+          "waypoint_progress",
+          "path_contact_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/push-wall-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "reach-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 1,
+      "transitions": 0,
+      "horizon": 200,
+      "stages": [
+        "approach_target"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_target"
+        ]
+      ],
+      "simulator_state_api": "TCP--target distance",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/reach-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "reach-wall-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 1,
+      "transitions": 0,
+      "horizon": 200,
+      "stages": [
+        "approach_target"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_target"
+        ]
+      ],
+      "simulator_state_api": "TCP--target distance",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/reach-wall-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "shelf-place-v3",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 500,
+      "stages": [
+        "approach_object",
+        "capture_object",
+        "fixture_clearance",
+        "transport_or_extract",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "capture_progress"
+        ],
+        [
+          "tcp_to_vertical",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held"
+        ],
+        [
+          "tcp_to_transport",
+          "object_transport_to_final",
+          "clearance_progress",
+          "tcp_to_grasp",
+          "held",
+          "object_to_final"
+        ],
+        [
+          "object_to_final",
+          "fine_object_to_final",
+          "tcp_to_grasp",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target/initial poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/shelf-place-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "soccer-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/soccer-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "stick-pull-v3",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 200,
+      "stages": [
+        "approach_tool",
+        "capture_and_lift_tool",
+        "tool_endpoint_at_secondary_object",
+        "secondary_object_at_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "tool_lift"
+        ],
+        [
+          "effect_to_secondary",
+          "alignment_distance",
+          "gripper_closed",
+          "held",
+          "tcp_to_grasp"
+        ],
+        [
+          "secondary_to_target",
+          "effect_to_secondary",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, tool/secondary/target poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/stick-pull-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "stick-push-v3",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 200,
+      "stages": [
+        "approach_tool",
+        "capture_and_lift_tool",
+        "tool_endpoint_at_secondary_object",
+        "secondary_object_at_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_to_pregrasp",
+          "gripper_opening"
+        ],
+        [
+          "tcp_to_grasp",
+          "held",
+          "tool_lift"
+        ],
+        [
+          "effect_to_secondary",
+          "alignment_distance",
+          "gripper_closed",
+          "held",
+          "tcp_to_grasp"
+        ],
+        [
+          "secondary_to_target",
+          "effect_to_secondary",
+          "held"
+        ]
+      ],
+      "simulator_state_api": "TCP, tool/secondary/target poses, gripper, optional orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/stick-push-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "sweep-into-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/sweep-into-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "sweep-v3",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_object",
+        "contact_object",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepush_distance"
+        ],
+        [
+          "contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ],
+        [
+          "obj_target_distance",
+          "target_contact_distance",
+          "tcp_obj_distance",
+          "gripper_opening"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/target poses, gripper",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/sweep-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "window-close-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/window-close-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "Meta-World",
+      "task_id": "window-open-v3",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 200,
+      "stages": [
+        "approach_control",
+        "contact_control",
+        "verify_task_outcome"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "prepress_distance"
+        ],
+        [
+          "tcp_to_contact_point"
+        ],
+        [
+          "contact_distance",
+          "press_or_target_distance",
+          "tcp_press_axis_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, control/handle, target pose",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/metaworld/window-open-v3.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "DrawTriangle-v1",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_canvas_start",
+        "trace_first_side",
+        "trace_remaining_sides",
+        "complete_triangle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "reach"
+        ],
+        [
+          "path_coverage"
+        ],
+        [
+          "path_coverage"
+        ],
+        [
+          "covered"
+        ]
+      ],
+      "simulator_state_api": "TCP, canvas/vertices, path coverage, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/DrawTriangle-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "FMBAssembly1Easy-v1",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 6,
+      "transitions": 5,
+      "horizon": 500,
+      "stages": [
+        "reach_bridge",
+        "grasp_bridge",
+        "reorient_with_fixture",
+        "regrasp_bridge",
+        "align_with_board",
+        "place_bridge"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_bridge"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "fixture_error",
+          "goal_angle"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "goal_pos",
+          "goal_angle"
+        ],
+        [
+          "goal_pos"
+        ]
+      ],
+      "simulator_state_api": "TCP, bridge/fixture/goal poses, grasp, orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/FMBAssembly1Easy-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "LiftPegUpright-v1",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_peg",
+        "grasp_peg",
+        "reorient_upright",
+        "settle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_peg"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "upright"
+        ],
+        [
+          "upright",
+          "z_error"
+        ]
+      ],
+      "simulator_state_api": "TCP, peg pose, grasp, upright/height",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/LiftPegUpright-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PegInsertionSide-v1",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_peg",
+        "grasp_peg",
+        "align_with_hole",
+        "insert"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_peg"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "align_error"
+        ],
+        [
+          "hole_error"
+        ]
+      ],
+      "simulator_state_api": "TCP, peg/hole poses, grasp",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PegInsertionSide-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PickCube-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 100,
+      "stages": [
+        "reach_object",
+        "establish_grasp",
+        "transport_and_settle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "obj_goal"
+        ]
+      ],
+      "simulator_state_api": "TCP, cube/goal poses, grasp",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PickCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PickSingleYCB-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_object",
+        "establish_grasp",
+        "transport_to_goal",
+        "settle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "goal"
+        ],
+        [
+          "placed",
+          "static"
+        ]
+      ],
+      "simulator_state_api": "TCP, object/goal poses, grasp, placed/static",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PickSingleYCB-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PlaceSphere-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_sphere",
+        "grasp_sphere",
+        "align_with_bin",
+        "place_and_release"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "goal"
+        ],
+        [
+          "on_bin",
+          "released"
+        ]
+      ],
+      "simulator_state_api": "TCP, sphere/bin poses, grasp",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PlaceSphere-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PlugCharger-v1",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 100,
+      "stages": [
+        "reach_charger",
+        "grasp_charger",
+        "orient",
+        "align_with_receptacle",
+        "insert"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "orientation_error"
+        ],
+        [
+          "obj_goal",
+          "orientation_error"
+        ],
+        [
+          "obj_goal"
+        ]
+      ],
+      "simulator_state_api": "TCP, charger/goal poses, grasp, orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PlugCharger-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PokeCube-v1",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_tool",
+        "grasp_tool",
+        "align_tool_with_cube",
+        "poke_to_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_peg"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "peg_angle",
+          "head_cube_distance"
+        ],
+        [
+          "cube_goal"
+        ]
+      ],
+      "simulator_state_api": "TCP, peg/cube/goal poses, grasp, orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PokeCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PullCube-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 100,
+      "stages": [
+        "reach_pull_pose",
+        "establish_contact",
+        "pull_to_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_pull"
+        ],
+        [
+          "tcp_pull"
+        ],
+        [
+          "obj_goal"
+        ]
+      ],
+      "simulator_state_api": "TCP, cube/goal poses",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PullCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PullCubeTool-v1",
+      "task_type": "Tool",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_tool",
+        "grasp_tool",
+        "hook_cube",
+        "pull_to_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_tool"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "hook_error"
+        ],
+        [
+          "cube_base_distance"
+        ]
+      ],
+      "simulator_state_api": "TCP, tool/cube poses, grasp, hook geometry",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PullCubeTool-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PushCube-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 3,
+      "transitions": 2,
+      "horizon": 100,
+      "stages": [
+        "reach_pre_push_pose",
+        "establish_contact",
+        "push_to_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_push"
+        ],
+        [
+          "tcp_push"
+        ],
+        [
+          "obj_goal"
+        ]
+      ],
+      "simulator_state_api": "TCP, cube/goal poses",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PushCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "PushT-v1",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_contact_pose",
+        "translate_object",
+        "rotate_and_align",
+        "settle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "xy_error"
+        ],
+        [
+          "angle_error"
+        ],
+        [
+          "xy_error",
+          "angle_error"
+        ]
+      ],
+      "simulator_state_api": "TCP, T/goal poses, orientation",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/PushT-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "RollBall-v1",
+      "task_type": "Rigid",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_ball",
+        "establish_contact",
+        "roll_to_goal",
+        "settle"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_hit"
+        ],
+        [
+          "tcp_ball"
+        ],
+        [
+          "ball_goal"
+        ],
+        [
+          "ball_speed"
+        ]
+      ],
+      "simulator_state_api": "TCP, ball/goal pose, ball velocity",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/RollBall-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "RotateValveLevel4-v1",
+      "task_type": "Artic.",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_valve_spokes",
+        "establish_turning_motion",
+        "rotate_full_turn",
+        "settle_success"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "contact_error"
+        ],
+        [
+          "contact_error",
+          "positive_motion"
+        ],
+        [
+          "rotation_progress"
+        ],
+        [
+          "success",
+          "valve_speed"
+        ]
+      ],
+      "simulator_state_api": "finger tips, valve pose/qpos/qvel, turn direction, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/RotateValveLevel4-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "StackCube-v1",
+      "task_type": "Rigid",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 100,
+      "stages": [
+        "reach_cube",
+        "grasp_cube",
+        "align_above_base",
+        "place",
+        "release"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_obj"
+        ],
+        [
+          "grasped"
+        ],
+        [
+          "goal_error"
+        ],
+        [
+          "goal_error"
+        ],
+        [
+          "success"
+        ]
+      ],
+      "simulator_state_api": "TCP, cube poses, grasp, stack geometry, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/StackCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "StackPyramid-v1",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 7,
+      "transitions": 6,
+      "horizon": 250,
+      "stages": [
+        "grasp_red",
+        "place_red_beside_green",
+        "release_red",
+        "grasp_blue",
+        "align_blue",
+        "stack_blue",
+        "release_blue"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tcp_red",
+          "grasp_red"
+        ],
+        [
+          "red_green_distance"
+        ],
+        [
+          "beside",
+          "release_red"
+        ],
+        [
+          "tcp_blue",
+          "grasp_blue"
+        ],
+        [
+          "blue_goal"
+        ],
+        [
+          "stacked"
+        ],
+        [
+          "success"
+        ]
+      ],
+      "simulator_state_api": "TCP, three cube poses, grasp/static flags, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/StackPyramid-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "TriFingerRotateCubeLevel4-v1",
+      "task_type": "Precise",
+      "long_horizon": false,
+      "K": 4,
+      "transitions": 3,
+      "horizon": 100,
+      "stages": [
+        "reach_cube_with_fingers",
+        "lift_and_translate_cube",
+        "match_goal_orientation",
+        "settle_at_goal"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "tip_to_cube"
+        ],
+        [
+          "position_progress"
+        ],
+        [
+          "pose_progress"
+        ],
+        [
+          "success"
+        ]
+      ],
+      "simulator_state_api": "finger tips, cube/goal pose, position/orientation error, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/TriFingerRotateCubeLevel4-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "ManiSkill",
+      "task_id": "TwoRobotStackCube-v1",
+      "task_type": "Precise",
+      "long_horizon": true,
+      "K": 5,
+      "transitions": 4,
+      "horizon": 100,
+      "stages": [
+        "reach_assigned_cubes",
+        "grasp_top_cube",
+        "place_bottom_cube",
+        "stack_top_cube",
+        "release_both"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "reach"
+        ],
+        [
+          "cubeA_grasped"
+        ],
+        [
+          "cubeB_goal",
+          "cubeA_grasped"
+        ],
+        [
+          "cubeA_top_error"
+        ],
+        [
+          "success"
+        ]
+      ],
+      "simulator_state_api": "robot TCPs, cube/goal poses, grasp, success",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/maniskill/TwoRobotStackCube-v1.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "ClothDrop",
+      "task_type": "Deform.",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "approach_release",
+        "flat_completion"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "target_progress",
+          "target_alignment",
+          "low_height",
+          "spread"
+        ],
+        [
+          "target_progress",
+          "target_alignment",
+          "flatness",
+          "spread"
+        ]
+      ],
+      "simulator_state_api": "particles, cloth size/radius, target layout",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/ClothDrop.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "ClothFlatten",
+      "task_type": "Deform.",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "spread_progress",
+        "flat_completion"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "spread",
+          "flatness"
+        ],
+        [
+          "spread",
+          "flatness"
+        ]
+      ],
+      "simulator_state_api": "particles, cloth size/radius",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/ClothFlatten.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "ClothFold",
+      "task_type": "Deform.",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "fold_progress",
+        "fold_completion"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "coverage_A_to_B",
+          "coverage_B_to_A"
+        ],
+        [
+          "coverage_A_to_B",
+          "coverage_B_to_A"
+        ]
+      ],
+      "simulator_state_api": "particles, fold groups, initial group distance",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/ClothFold.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "PassWater",
+      "task_type": "Fluid",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "transport_progress",
+        "water_delivery"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "transport_progress",
+          "retained_water"
+        ],
+        [
+          "target_closeness",
+          "spill_penalty"
+        ]
+      ],
+      "simulator_state_api": "cup/target x, water particles, in-glass test, glass geometry",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/PassWater.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "PourWater",
+      "task_type": "Fluid",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "pour_progress",
+        "target_fill_completion"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "cup_alignment",
+          "tilt",
+          "early_transfer",
+          "retained_water"
+        ],
+        [
+          "target_fill",
+          "retained_water",
+          "source_emptying"
+        ]
+      ],
+      "simulator_state_api": "source/target cup geometry, water particles, in-glass test",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/PourWater.json",
+      "program_source": "frame_vlm_main_table_round5"
+    },
+    {
+      "benchmark": "SoftGym",
+      "task_id": "RopeFlatten",
+      "task_type": "Deform.",
+      "long_horizon": false,
+      "K": 2,
+      "transitions": 1,
+      "horizon": 100,
+      "stages": [
+        "stretch_progress",
+        "straight_completion"
+      ],
+      "dense_terms_by_stage": [
+        [
+          "extension",
+          "straightness"
+        ],
+        [
+          "straightness",
+          "extension",
+          "on_plane"
+        ]
+      ],
+      "simulator_state_api": "ordered particles, rope length",
+      "reward_config": {
+        "gamma": 0.99,
+        "delta_max": 0.1,
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0
+      },
+      "gate_config": {
+        "rule": "adapter_candidate_and_dwell",
+        "vlm": "frozen_frame_packet_at_candidate",
+        "abstain": "reject_transition"
+      },
+      "reward_machine": "reward_machines/softgym/RopeFlatten.json",
+      "program_source": "frame_vlm_main_table_round5"
+    }
+  ]
+}

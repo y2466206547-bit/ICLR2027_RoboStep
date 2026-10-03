@@ -1,0 +1,130 @@
+{
+  "benchmark": "SoftGym",
+  "task_id": "ClothFold",
+  "task_type": "Deform.",
+  "long_horizon": false,
+  "K": 2,
+  "transitions": 1,
+  "horizon": 100,
+  "stages": [
+    "fold_progress",
+    "fold_completion"
+  ],
+  "dense_terms_by_stage": [
+    [
+      "coverage_A_to_B",
+      "coverage_B_to_A"
+    ],
+    [
+      "coverage_A_to_B",
+      "coverage_B_to_A"
+    ]
+  ],
+  "simulator_state_api": "particles, fold groups, initial group distance",
+  "reward_config": {
+    "gamma": 0.99,
+    "delta_max": 0.1,
+    "dwell_steps": 1,
+    "transition_bonus": 0.5,
+    "dense_scale": 1.0
+  },
+  "gate_config": {
+    "rule": "adapter_candidate_and_dwell",
+    "vlm": "frozen_frame_packet_at_candidate",
+    "abstain": "reject_transition"
+  },
+  "reward_program": {
+    "task_id": "ClothFold",
+    "task_description": "ClothFold manipulation with ordered stage completion.",
+    "source": "frame_vlm_main_table_round5",
+    "compiler_round": 5,
+    "model_id": "Frame-VLM",
+    "metadata": {
+      "benchmark": "SoftGym",
+      "task_type": "Deform.",
+      "long_horizon": false,
+      "simulator_state_api": "particles, fold groups, initial group distance",
+      "feature_convention": "Each named feature is supplied by the native benchmark adapter in [0,1]. Decrease terms are normalized costs and are inverted by TaskRewardMachine."
+    },
+    "stages": [
+      {
+        "stage_id": "fold_progress",
+        "semantic_objective": "Fold progress",
+        "potential_terms": [
+          {
+            "name": "coverage_A_to_B",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "coverage_B_to_A",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "fold_progress_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Fold progress"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      },
+      {
+        "stage_id": "fold_completion",
+        "semantic_objective": "Fold completion",
+        "potential_terms": [
+          {
+            "name": "coverage_A_to_B",
+            "weight": 1.0,
+            "direction": "decrease"
+          },
+          {
+            "name": "coverage_B_to_A",
+            "weight": 1.0,
+            "direction": "decrease"
+          }
+        ],
+        "dwell_steps": 1,
+        "transition_bonus": 0.5,
+        "dense_scale": 1.0,
+        "progress_aggregation": "potential",
+        "completion_predicate": [
+          "fold_completion_complete"
+        ],
+        "normalization": "adapter_normalized_0_1",
+        "hysteresis": {},
+        "adversarial_counterexamples": [],
+        "maintenance_terms": [],
+        "safety_terms": [],
+        "prerequisites": [
+          "fold_progress"
+        ],
+        "recovery_policy": "gate",
+        "vlm_verification": true,
+        "visible_evidence": [
+          "Fold completion"
+        ],
+        "abstain_conditions": [
+          "occlusion",
+          "invalid_state"
+        ]
+      }
+    ]
+  }
+}
